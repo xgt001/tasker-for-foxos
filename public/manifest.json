@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+
+  "name": "Chrome Offline Tasks",
+  "description": "A very simple task list that uses localStorage",
+  "version": "1.0",
+  "background_page": "app.html",
+
+  "permissions": [
+    "storage"
+    "tabs"
+  ],
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  }
+}
