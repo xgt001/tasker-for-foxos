@@ -68,7 +68,8 @@ $(document).ready ->
     setNewTodo()
 
   $(document).on "click", "#todo-list li", (e) ->
-    markDone(getId(this))
-
-
-
+    self = this
+    $(self).find('input').prop('checked', true)
+    $(self).fadeOut(500, ->
+      markDone(getId(self)) 
+      )

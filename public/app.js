@@ -74,6 +74,11 @@ $(document).ready(function() {
     return setNewTodo();
   });
   return $(document).on("click", "#todo-list li", function(e) {
-    return markDone(getId(this));
+    var self;
+    self = this;
+    $(self).find('input').prop('checked', true);
+    return $(self).fadeOut(500, function() {
+      return markDone(getId(self));
+    });
   });
 });
