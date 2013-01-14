@@ -1,34 +1,68 @@
+black = #222
+gray = #444
+light-gray = #888
+xlight-gray = #aaa
+background = #f7f6f5
+green = #81ad45
+dark-green = darken(green, 10)
+
+font-xsmall = 11px
+font-small = 14px
+font-large = 16px
+
 @import 'nib'
 
 *
   box-sizing: border-box
 
 body
-  background-color #fff
+  background-color white
   font-family "Open Sans", sans-serif
-  color #444
-  font-size 14px
+  color gray
+  font-size font-small
   font-weight 600
   -webkit-font-smoothing antialiased
 
 .content
-  margin 40px auto
+  margin 20px auto
   border-radius 6px
   border 1px solid #ccc
-  box-shadow inset 0px 1px 0px white, 0px 2px 3px #eee
+  box-shadow 0px 2px 3px #eee
   width 450px
   min-height 600px
-  background-color #f7f6f5
+  background-color background
 
 .header
   padding 20px
+  box-shadow inset 0px 1px 0px white, 0px 1px 0px white
+  background-image linear-gradient(top, #f7f6f5, #eee)
+  border-top-left-radius 6px
+  border-top-right-radius 6px
+  border-bottom 1px solid #ccc
+
+  #mark-all-done
+    float right
+    margin-top -17px
+    font-size font-xsmall
+    color light-gray
+
+    &:hover
+      color gray
 
 h1
   margin 0px
   text-transform uppercase
-  font-size 16px
-  color #aaa
+  font-size font-large
+  color xlight-gray
   text-shadow 0px 1px white
+
+a
+  color gray
+  text-decoration none
+  text-shadow 0px 1px white
+
+  &:hover
+    color black
 
 #new-todo-wrapper
   margin-top 20px
@@ -43,31 +77,31 @@ input[type='text']
   margin-right 2%
   padding 7px 8px
   border-radius 3px
-  border 1px solid #ccc
-  width 68%
-  font-size 13px
+  border 1px solid xlight-gray
+  width 73%
+  font-size font-small
 
   &:focus
     outline none
-    border 1px solid #aaa
+    border 1px solid light-gray
 
 .button
-  width 30%
+  width 25%
   float left
-  background-image linear-gradient(top, #f7f6f5, #e7e6e5)
-  box-shadow inset 0px 1px 0px white
-  border 1px solid #ccc
+  background-image linear-gradient(top, green, lighten(dark-green, 5))
+  box-shadow inset 0px 1px 0px lighten(green, 10)
+  border 1px solid dark-green
   border-radius 3px
   padding 7px 8px
-  font-size 13px
+  font-size font-small
   font-weight 600
-  text-shadow 0px 1px white
-  color #888
+  text-shadow 0px 2px dark-green
+  color white
   cursor pointer
 
   &:hover
-    box-shadow inset 0px 1px 0px white, 0px 2px 3px #ddd
-    color #333
+    box-shadow 0px 2px 3px #ddd, inset 0px 1px 0px lighten(green, 20)
+    background-image linear-gradient(top, lighten(green,10), green)
 
 #todo-list
   margin 0px
@@ -80,17 +114,42 @@ input[type='text']
     box-shadow 0px 1px 0px white
     cursor pointer
 
-    &:first-child
-      border-top 1px solid #ddd
-      box-shadow inset 0px 1px 0px white, 0px 1px 0px white
-
     &:hover
       background-color #eee
       box-shadow inset 0px 0px 3px #d9d9d9, 0px 1px 0px white
 
     input[type='checkbox']
       margin-right 10px
+      cursor pointer
 
     label
       cursor pointer
+
+.footer
+  margin 0px auto
+  width 450px
+  padding-bottom 20px
+
+  a
+    color green
+
+    &:hover
+      color dark-green
+
+  ul
+    list-style-type none
+    color light-gray
+    margin 0px
+    padding 0px
+    overflow hidden
+
+    li
+      float left
+      font-size font-xsmall
+      width 33%
+      text-align center
+
+@media screen and (max-width: 500px)
+  .content, .footer
+    width 100%
 

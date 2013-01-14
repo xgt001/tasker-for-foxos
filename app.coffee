@@ -6,52 +6,47 @@ $(document).ready ->
     showTodos(allTodos)
     $("#new-todo").focus()
 
-  # Pulls stuff from localStorage
-  getAllTodos = ->
-    todo = localStorage.getItem("todo")
-    todo = JSON.parse(todo) || []
-    todo
-
-  # Gets whatever is in the input and saves it
-  setNewTodo = ->
-    name = $("#new-todo").val() # get it from the input
-    newTodo = createToDo(name) # create a new todo object
-    allTodos = getAllTodos() # get what we have currently from getAllTodos()
-    allTodos.push newTodo # append our new shit
-    setAllTodos(allTodos)
-
-  setAllTodos = (allTodos) ->
-    localStorage.setItem("todo", JSON.stringify(allTodos)) # push that shit to localStorage as a string
-    showTodos(allTodos) # run the showTodos again to show the latest one
-    
-    $("#new-todo").val('') # set the input to blank so we can type again
-    
-  getId = (li) ->
-    id = $(li).find('input').attr('id').replace('todo', '') # Finds the input id and strips 'todo' from it
-    parseInt(id) # Turns it into an integer (and return)
-
-  markDone = (id) ->
-    todos = getAllTodos()
-    todos.splice(id,1)
-    setAllTodos(todos)
-
   # Creates a new todo object
   createToDo = (name) ->
     todo =
       isDone: false
       name: name
 
-  # Actually chuck that shit in the div
-  showTodos = (allTodos) ->
-    html = generateHTML(allTodos)
-    $("#todo-list").html(html) # insert them into the div #todo-list
+  # Pulls what we have in localStorage
+  getAllTodos = ->
+    allTodos = localStorage.getItem("todo")
+    allTodos = JSON.parse(allTodos) || []
+    allTodos
 
-  # Gives us the shit in an li with labels and a checkbox
-  generateHTML = (allTodos) ->
-    names = getNames(allTodos) # get what's returned from allTodos()
-    for name, i in names
-      names[i] = '<li><input type="checkbox" id="todo' + i + '"></input><label for=todo' + i + '>' + name + '</label></li>'
-    names
+  # Gets whatever is in the input and saves it
+  setNewTodo = ->
+    name = $("#new-todo").val()
+    newTodo = createToDo(name)
+    allTodos = getAllTodos()
+    allTodos.push newTodo
+    setAllTodos(allTodos)
+
+  # Updates the localStorage and runs showTodos again to update the list
+  setAllTodos = (allTodos) ->
+    localStorage.setItem("todo", JSON.stringify(allTodos))
+    showTodos(allTodos)
+    $("#new-todo").val('')
+    $("#new-todo").focus()
+    
+  # Finds the input id, strips 'todo' from it, and converts the string to an int
+  getId = (li) ->
+    id = $(li).find('input').attr('id').replace('todo', '')
+    parseInt(id)
+
+  # Removes the selected todo from the list and parses that to setAllTodos to update localStorage
+  markDone = (id) ->
+    todos = getAllTodos()
+    todos.splice(id,1)
+    setAllTodos(todos)
+
+  markAllDone = ->
+    localStorage.clear()
+    initialize()
 
   # Grab everything from the key 'name' out of the object
   getNames = (allTodos) ->
@@ -60,6 +55,19 @@ $(document).ready ->
       names.push todo['name'] # append the value to our new array called names
     names # return them so allTodos() can use it
 
+  # Gives us the list formatted nicely
+  generateHTML = (allTodos) ->
+    names = getNames(allTodos)
+    for name, i in names
+      names[i] = '<li><input type="checkbox" id="todo' + i + '"></input><label for=todo' + i + '>' + name + '</label></li>'
+    names
+
+  # Inserts that nicely formatted list into ul #todo-list
+  showTodos = (allTodos) ->
+    html = generateHTML(allTodos)
+    $("#todo-list").html(html)
+
+  # Runs the initialize function when the page loads
   initialize()
 
   # Triggers the setting of the new todo when clicking the button
@@ -67,6 +75,15 @@ $(document).ready ->
     e.preventDefault()
     setNewTodo()
 
+  # Click Mark all done
+  $("#mark-all-done").click (e) ->
+    e.preventDefault()
+    if confirm "Are you sure you want to mark all tasks as done?"
+      markAllDone()
+    else
+      return
+
+  # When you click an li, fade it out and run markDone()
   $(document).on "click", "#todo-list li", (e) ->
     self = this
     $(self).find('input').prop('checked', true)
