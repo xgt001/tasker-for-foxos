@@ -1,5 +1,7 @@
 $(document).ready ->
 
+  clickedTimers = {}
+
   # Runs functions on page load
   initialize = ->
     allTodos = getAllTodos()
@@ -15,8 +17,8 @@ $(document).ready ->
   # Pulls what we have in localStorage
   getAllTodos = ->
     allTodos = localStorage.getItem("todo")
-    allTodos = JSON.parse(allTodos) || []
-    # allTodos = JSON.parse(allTodos) || [{"isDone":false,"name":"Do the laundry"}, {"isDone":false,"name":"Put out the rubbish"}, {"isDone":false,"name":"Follow @humphreybc on Twitter"}]
+    # allTodos = JSON.parse(allTodos) || []
+    allTodos = JSON.parse(allTodos) || [{"isDone":false,"name":"Add a new task above"}, {"isDone":false,"name":"Refresh and see your task is still here"}, {"isDone":false,"name":"Click a task to complete it"}, {"isDone":false,"name":"Follow @humphreybc on Twitter"}]
     allTodos
 
   # Gets whatever is in the input and saves it
@@ -48,7 +50,7 @@ $(document).ready ->
 
   # Clears localStorage
   markAllDone = ->
-    localStorage.clear()
+    localStorage.setItem("todo", JSON.stringify([]))
     initialize()
 
   # Grab everything from the key 'name' out of the object
@@ -88,8 +90,31 @@ $(document).ready ->
 
   # When you click an li, fade it out and run markDone()
   $(document).on "click", "#todo-list li", (e) ->
+    e.stopPropagation()
     self = this
-    $(self).find('input').prop('checked', true)
+    # if e.target.tagName.toUpperCase() isnt "LI" and e.target.tagName.toUpperCase() isnt "LABEL"
+    #   return
+    console.log 'clicked'
+    console.log e.target.tagName
+
+    # $(self).find("input").prop "checked", true
+    # elId = getId(self)
+
+    # console.log clickedTimers
+
+    # if elId of clickedTimers
+    #   clearTimeout(clickedTimers[elId])
+    #   delete clickedTimers[elId]
+    #   return
+
+    # timerId = setTimeout ( ->
+    #   $(self).fadeOut(500, ->
+    #     markDone(getId(self))
+    #   ) 
+    # ), 3000
+
+    # clickedTimers[elId] = timerId
+
     $(self).fadeOut(500, ->
       markDone(getId(self))
     ) 
