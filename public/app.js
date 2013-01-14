@@ -24,10 +24,12 @@ $(document).ready(function() {
   setNewTodo = function() {
     var allTodos, name, newTodo;
     name = $("#new-todo").val();
-    newTodo = createToDo(name);
-    allTodos = getAllTodos();
-    allTodos.push(newTodo);
-    return setAllTodos(allTodos);
+    if (name !== '') {
+      newTodo = createToDo(name);
+      allTodos = getAllTodos();
+      allTodos.push(newTodo);
+      return setAllTodos(allTodos);
+    }
   };
   setAllTodos = function(allTodos) {
     localStorage.setItem("todo", JSON.stringify(allTodos));

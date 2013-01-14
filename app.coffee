@@ -22,10 +22,11 @@ $(document).ready ->
   # Gets whatever is in the input and saves it
   setNewTodo = ->
     name = $("#new-todo").val()
-    newTodo = createToDo(name)
-    allTodos = getAllTodos()
-    allTodos.push newTodo
-    setAllTodos(allTodos)
+    unless name == ''
+      newTodo = createToDo(name)
+      allTodos = getAllTodos()
+      allTodos.push newTodo
+      setAllTodos(allTodos)
 
   # Updates the localStorage and runs showTodos again to update the list
   setAllTodos = (allTodos) ->
