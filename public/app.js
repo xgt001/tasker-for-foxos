@@ -18,18 +18,7 @@ $(document).ready(function() {
   getAllTodos = function() {
     var allTodos;
     allTodos = localStorage.getItem("todo");
-    allTodos = JSON.parse(allTodos) || [
-      {
-        "isDone": false,
-        "name": "Do the laundry"
-      }, {
-        "isDone": false,
-        "name": "Put out the rubbish"
-      }, {
-        "isDone": false,
-        "name": "Follow @humphreybc on Twitter"
-      }
-    ];
+    allTodos = JSON.parse(allTodos) || [];
     return allTodos;
   };
   setNewTodo = function() {
