@@ -91,5 +91,5 @@ $(document).ready ->
     self = this
     $(self).find('input').prop('checked', true)
     $(self).fadeOut(500, ->
-      markDone(getId(self)) 
-      )
+      markDone(getId(self))
+    ) 

@@ -14,11 +14,11 @@ A very simple tasks app that uses localStorage to save the list. This exists mai
 ### To-do
 
 * Default tasks
+* Completed task shouldn't disappear straight away
 * Undo
 * Star a task and it goes to the top
 * Edit a task
 * IE support
-* Date with desktop notification reminder
 
 ### Dependencies
 
