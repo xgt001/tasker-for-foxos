@@ -15,7 +15,7 @@ $(document).ready ->
   # Pulls what we have in localStorage
   getAllTodos = ->
     allTodos = localStorage.getItem("todo")
-    allTodos = JSON.parse(allTodos) || []
+    allTodos = JSON.parse(allTodos) || [{"isDone":false,"name":"Do the laundry"}, {"isDone":false,"name":"Put out the rubbish"}, {"isDone":false,"name":"Follow @humphreybc on Twitter"}]
     allTodos
 
   # Gets whatever is in the input and saves it
