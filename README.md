@@ -13,7 +13,6 @@ A very simple tasks app that uses localStorage to save the list. This exists mai
 
 ### To-do
 
-* Fix wrapping of long tasks
 * Default tasks
 * Undo
 * Star a task and it goes to the top
