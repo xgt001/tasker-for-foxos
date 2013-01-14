@@ -42,13 +42,13 @@ body {
   border-top-right-radius: 6px;
   border-bottom: 1px solid #ccc;
 }
-.header #mark-all-done {
+#mark-all-done {
   float: right;
   margin-top: -17px;
   font-size: 11px;
   color: #888;
 }
-.header #mark-all-done:hover {
+#mark-all-done:hover {
   color: #444;
 }
 h1 {
@@ -188,6 +188,9 @@ input[type='text']:focus {
   }
   #todo-submit {
     margin-top: 10px;
+  }
+  #mark-all-done {
+    float: none;
   }
 }
 @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
