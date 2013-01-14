@@ -50,8 +50,7 @@ $(document).ready(function() {
   setAllTodos = function(allTodos) {
     localStorage.setItem("todo", JSON.stringify(allTodos));
     showTodos(allTodos);
-    $("#new-todo").val('');
-    return $("#new-todo").focus();
+    return $("#new-todo").val('');
   };
   getId = function(li) {
     var id;
