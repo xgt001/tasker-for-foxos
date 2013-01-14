@@ -1,6 +1,7 @@
 $(document).ready ->
 
   clickedTimers = {}
+  timeout = 0
 
   # Runs functions on page load
   initialize = ->
@@ -18,7 +19,10 @@ $(document).ready ->
   getAllTodos = ->
     allTodos = localStorage.getItem("todo")
     # allTodos = JSON.parse(allTodos) || []
-    allTodos = JSON.parse(allTodos) || [{"isDone":false,"name":"Add a new task above"}, {"isDone":false,"name":"Refresh and see your task is still here"}, {"isDone":false,"name":"Click a task to complete it"}, {"isDone":false,"name":"Follow @humphreybc on Twitter"}]
+    allTodos = JSON.parse(allTodos) || [{"isDone":false,"name":"Add a new task above"},
+                                        {"isDone":false,"name":"Refresh and see your task is still here"},
+                                        {"isDone":false,"name":"Click a task to complete it"},
+                                        {"isDone":false,"name":"Follow <a href='http://twitter.com/humphreybc' target='_blank'>@humphreybc</a> on Twitter"}]
     allTodos
 
   # Gets whatever is in the input and saves it
@@ -43,15 +47,27 @@ $(document).ready ->
     parseInt(id)
 
   # Removes the selected todo from the list and parses that to setAllTodos to update localStorage
+  # Then fades in the undo option at the top of the page and starts a timer to fade it out
+  # If the timer isn't interuppted by undoLast() then fade it out after 5 seconds and remove the todo item from 'undo'
   markDone = (id) ->
-    todos = getAllTodos()
-    todos.splice(id,1)
-    setAllTodos(todos)
+    allTodos = getAllTodos()
+    toDelete = allTodos[id]
+    toDelete['position'] = id
+    localStorage.setItem("undo", JSON.stringify(toDelete))
+    $("#undo").fadeIn(150)
+
+    timeout = setTimeout(->
+      $("#undo").fadeOut(250)
+      localStorage.removeItem("undo")
+    , 5000)
+
+    allTodos = getAllTodos()
+    allTodos.splice(id,1)
+    setAllTodos(allTodos)
 
   # Clears localStorage
   markAllDone = ->
-    localStorage.setItem("todo", JSON.stringify([]))
-    initialize()
+    setAllTodos([])
 
   # Grab everything from the key 'name' out of the object
   getNames = (allTodos) ->
@@ -72,6 +88,25 @@ $(document).ready ->
     html = generateHTML(allTodos)
     $("#todo-list").html(html)
 
+  # Grab the last todo from localStorage 'undo' and add it back to localStorage 'todo' using setAllTodos()
+  # Then remove that entry from localStorage 'undo' 
+  undoLast = ->
+    redo = localStorage.getItem("undo")
+    redo = JSON.parse(redo)
+    allTodos = getAllTodos()
+    position = redo.position
+    delete redo['position']
+    allTodos.splice(position, 0, redo)
+    setAllTodos(allTodos)
+    localStorage.removeItem("undo")
+    undoUX(allTodos)
+
+  # Update the page and stop the fadeOut timer and hide it straight away
+  undoUX = (allTodos) ->
+    showTodos(allTodos)
+    clearTimeout(timeout)
+    $("#undo").hide()
+
   # Runs the initialize function when the page loads
   initialize()
 
@@ -88,32 +123,14 @@ $(document).ready ->
     else
       return
 
+  # If the user clicks on the undo thing
+  $("#undo").click (e) ->
+    undoLast()
+
   # When you click an li, fade it out and run markDone()
   $(document).on "click", "#todo-list li", (e) ->
     e.stopPropagation()
     self = this
-    # if e.target.tagName.toUpperCase() isnt "LI" and e.target.tagName.toUpperCase() isnt "LABEL"
-    #   return
-    console.log 'clicked'
-    console.log e.target.tagName
-
-    # $(self).find("input").prop "checked", true
-    # elId = getId(self)
-
-    # console.log clickedTimers
-
-    # if elId of clickedTimers
-    #   clearTimeout(clickedTimers[elId])
-    #   delete clickedTimers[elId]
-    #   return
-
-    # timerId = setTimeout ( ->
-    #   $(self).fadeOut(500, ->
-    #     markDone(getId(self))
-    #   ) 
-    # ), 3000
-
-    # clickedTimers[elId] = timerId
 
     $(self).fadeOut(500, ->
       markDone(getId(self))

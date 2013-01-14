@@ -14,7 +14,8 @@
   -webkit-font-smoothing: antialiased;
 }
 .icon-pencil:before,
-.icon-star:before {
+.icon-star:before,
+.icon-history:before {
   font-family: 'entypo';
   speak: none;
   font-style: normal;
@@ -28,35 +29,8 @@
 .icon-star:before {
   content: "\22";
 }
-@font-face {
-  font-family: 'entypo';
-  src: url("fonts/entypo.eot");
-  src: url("fonts/entypo.eot?#iefix") format('embedded-opentype'), url("fonts/entypo.svg#entypo") format('svg'), url("fonts/entypo.woff") format('woff'), url("fonts/entypo.ttf") format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-[data-icon]:before {
-  font-family: 'entypo';
-  content: attr(data-icon);
-  speak: none;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-}
-.icon-pencil:before,
-.icon-star:before {
-  font-family: 'entypo';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-}
-.icon-pencil:before {
-  content: "\21";
-}
-.icon-star:before {
-  content: "\22";
+.icon-history:before {
+  content: "\23";
 }
 * {
   -webkit-box-sizing: border-box;
@@ -80,8 +54,12 @@ textarea {
   -webkit-font-smoothing: antialiased;
   font-family: "Open Sans", sans-serif;
 }
+.wrapper {
+  margin: 0px auto;
+  width: 450px;
+}
 .content {
-  margin: 0px auto 20px;
+  margin: 20px auto 20px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -89,7 +67,6 @@ textarea {
   -webkit-box-shadow: 0px 2px 3px #ddd;
   -moz-box-shadow: 0px 2px 3px #ddd;
   box-shadow: 0px 2px 3px #ddd;
-  width: 450px;
   min-height: 600px;
   background-color: #f7f6f5;
 }
@@ -116,6 +93,30 @@ textarea {
 }
 #mark-all-done:hover {
   color: #444;
+}
+#undo {
+  text-align: center;
+  background-color: #444;
+  color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 2px 5px 1px;
+  cursor: pointer;
+  font-size: 13px;
+  display: none;
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+}
+#undo:hover {
+  background-color: #222;
+}
+#undo .icon-history {
+  margin-right: 5px;
+  vertical-align: middle;
 }
 h1 {
   margin: 0px;
@@ -150,6 +151,9 @@ input[type='text'] {
 input[type='text']:focus {
   outline: none;
   border: 1px solid #888;
+  -webkit-box-shadow: 0px 1px 2px #ccc;
+  -moz-box-shadow: 0px 1px 2px #ccc;
+  box-shadow: 0px 1px 2px #ccc;
 }
 .button {
   width: 25%;
