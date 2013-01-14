@@ -39,7 +39,6 @@ $(document).ready ->
     localStorage.setItem("todo", JSON.stringify(allTodos))
     showTodos(allTodos)
     $("#new-todo").val('')
-    # $("#new-todo").focus()
     
   # Finds the input id, strips 'todo' from it, and converts the string to an int
   getId = (li) ->
