@@ -13,6 +13,7 @@ A very simple tasks app that uses localStorage to save the list. This exists mai
 
 ### To-do
 
+* Fix wrapping of long tasks
 * Default tasks
 * Add Google Analytics
 * Add HTML5 shiv
