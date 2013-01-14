@@ -5,7 +5,7 @@
 }
 body {
   background-color: #fff;
-  background-image: url("img/pw_maze_white.png");
+  background-image: url("../img/pw_maze_white.png");
   background-repeat: repeat;
   font-family: "Open Sans", sans-serif;
   color: #444;
@@ -195,6 +195,6 @@ input[type='text']:focus {
 }
 @media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   body {
-    background-image: url("img/pw_maze_white_@2X.png");
+    background-image: url("../img/pw_maze_white_@2X.png");
   }
 }

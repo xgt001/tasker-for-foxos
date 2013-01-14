@@ -16,7 +16,6 @@ A very simple tasks app that uses localStorage to save the list. This exists mai
 * Fix wrapping of long tasks
 * Default tasks
 * Add Google Analytics
-* Add HTML5 shiv
 * Undo
 * Star a task and it goes to the top
 * Edit a task
