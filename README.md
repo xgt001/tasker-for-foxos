@@ -18,10 +18,10 @@ A very simple tasks app that uses localStorage to save the list. This exists mai
 * Add Google Analytics
 * Add HTML5 shiv
 * Undo
-* Drag and drop reorder
-* Star a task
+* Star a task and it goes to the top
 * Edit a task
 * IE support
+* Date with desktop notification reminder
 
 ### Dependencies
 
