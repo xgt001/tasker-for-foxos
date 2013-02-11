@@ -30,9 +30,6 @@ $(document).ready(function() {
       }, {
         "isDone": false,
         "name": "Click a task to complete it"
-      }, {
-        "isDone": false,
-        "name": "Follow <a href='http://twitter.com/humphreybc' target='_blank'>@humphreybc</a> on Twitter"
       }
     ];
     return allTodos;
@@ -122,7 +119,7 @@ $(document).ready(function() {
   });
   $("#mark-all-done").click(function(e) {
     e.preventDefault();
-    if (confirm("Are you sure you want to mark all tasks as done?")) {
+    if (confirm("Are you sure?")) {
       return markAllDone();
     } else {
 
