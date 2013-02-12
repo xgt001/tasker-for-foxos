@@ -69,6 +69,25 @@ $(document).ready(function() {
     allTodos.splice(id, 1);
     return setAllTodos(allTodos);
   };
+///////////////// testing code may be removed anytime!!!!!!!!!!!
+/*markDone = function(id) {
+    var allTodos, toEdit;
+    allTodos = getAllTodos();
+    toEdit = allTodos[id];
+    toEdit['position'] = id;
+    localStorage.setItem("undo", JSON.stringify(toDelete));
+    $("#undo").fadeIn(150);
+    timeout = setTimeout(function() {
+      $("#undo").fadeOut(250);
+      return localStorage.removeItem("undo");
+    }, 5000);
+    allTodos = getAllTodos();
+
+    return setAllTodos(allTodos);
+  };*/
+  ///////////////////////////////////////////!!!!!!!!!!!!!!!!!!!
+
+
   markAllDone = function() {
     return setAllTodos([]);
   };
@@ -95,6 +114,8 @@ $(document).ready(function() {
     html = generateHTML(allTodos);
     return $("#todo-list").html(html);
   };
+
+
   undoLast = function() {
     var allTodos, position, redo;
     redo = localStorage.getItem("undo");
@@ -108,7 +129,7 @@ $(document).ready(function() {
     return undoUX(allTodos);
   };
   undoUX = function(allTodos) {
-    showTodos(allTodos);
+    showTodos(allTodos);t
     clearTimeout(timeout);
     return $("#undo").hide();
   };
